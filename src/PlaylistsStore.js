@@ -62,12 +62,9 @@ class PlaylistsStore {
 
   async deletePlaylist(key) {
     try {
-        await this.playlistDB.del(key); // Assuming 'address' is the key for deletion
+        await this.playlistDB.del(key);
         console.log(`Playlist at address ${key} deleted successfully.`);
-        // Find the index of the playlist in the this.playlists array
         const index = this.playlists.findIndex(playlist => playlist.key === key);
-
-        // If found, remove it from the array
         if (index !== -1) {
           this.playlists.splice(index, 1);
         }
