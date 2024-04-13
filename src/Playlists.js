@@ -27,6 +27,11 @@ const Playlists = (props) => {
                     }
                 )}
             </ul>
+            <button onClick={async () => {
+                props.store.playlistDB.drop()
+                props.store.playlists = []
+            }}>Drop DB locally
+            </button>
         </div>
     )
 }
