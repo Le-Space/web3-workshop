@@ -7,7 +7,7 @@ const CreatePlaylist = (props) => {
 
   async function handleSubmit (event) {
     event.preventDefault()
-    const playlist = await props.store.createNewPlaylist(name)
+    await props.store.createNewPlaylist(name)
     setName('')
     console.log("name",name)
   }

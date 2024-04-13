@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeObservable,observable,computed, action, flow } from 'mobx'
 import { createOrbitDB, Identities, IPFSAccessController, OrbitDBAccessController } from "@orbitdb/core";
 import { unixfs } from '@helia/unixfs'
 
@@ -7,15 +7,22 @@ class PlaylistsStore {
   playlists = []
   isOnline = false
   currentPlaylist = {}
+  version = "v0.1"
+  ipfs = null
+  odb = null
+  playlistDB = null
 
   constructor () {
-    makeAutoObservable(this);
-    this.version = "v0.1"
-    this.ipfs = null
-    this.odb = null
-    this.playlistDB = null
-    this.playlists = []
-    this.isOnline = false
+    makeObservable(this, {
+      playlists: observable,
+      currentPlaylist: observable,
+      connect: action,
+      deletePlaylist: action,
+      loadPlaylists: action,
+      joinPlaylist: action,
+      addFile: action,
+      addToPlaylists: action
+    })
   }
 
   async connect(ipfs, options = {}) {
@@ -74,7 +81,7 @@ class PlaylistsStore {
   }
 
   async loadPlaylists(entry) {
-    if(entry?.op==='DEL') entry = undefined //don't add this entry just load all records
+    if(entry?.op==='DEL') return // //entry = undefined //don't add this entry just load all records
     
     console.log("loading playlists from orbitdb")
     
@@ -182,11 +189,10 @@ class PlaylistsStore {
   }
 
   async addToPlaylist (address, data) {
-    // const feed = this.odb.stores[address] || await this.odb.open(address)
-    const feed = await this.odb.open(address)
-    if (feed) {
-      const hash = await feed.put(data)
-      return feed.get(hash)
+    const documents = await this.odb.open(address)
+    if (documents) {
+      const hash = await documents.put(data)
+      return documents.get(hash)
     }
     return
   }
