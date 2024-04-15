@@ -7,7 +7,7 @@ class PlaylistsStore {
   playlists = []
   isOnline = false
   currentPlaylist = {}
-  version = "v0.1"
+  connectedPeers = []
   ipfs = null
   odb = null
   playlistDB = null
@@ -16,6 +16,7 @@ class PlaylistsStore {
     makeObservable(this, {
       playlists: observable,
       currentPlaylist: observable,
+      connectedPeers: observable,
       connect: action,
       deletePlaylist: action,
       loadPlaylists: action,
@@ -28,6 +29,19 @@ class PlaylistsStore {
   async connect(ipfs, options = {}) {
     this.ipfs = ipfs
 
+    ipfs.libp2p.addEventListener('connection:open',  async (c) => {
+      console.log("connection:open",c.detail.remoteAddr.toString())
+      this.connectedPeers.push(c.detail.remoteAddr.toString())
+      console.log("connectedPeers",this.connectedPeers)
+    });
+
+    ipfs.libp2p.addEventListener('connection:close', (c) => {
+      console.log("connection:close",c);
+      const index =  this.connectedPeers.indexOf(c.detail.remoteAddr.toString());
+      const x =  this.connectedPeers.splice(index, 1);
+      // this.connectedPeers-=1
+      console.log("connectedPeers",this.connectedPeers)
+    });
     const identities = await Identities({ ipfs }) //if you forget this you can spend a full day looking for the mistake
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
