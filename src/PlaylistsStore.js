@@ -49,7 +49,8 @@ class PlaylistsStore {
 
     this.playlistDB.events.on('update', async (entry) => {
       console.log("update event",entry);
-      await this.loadPlaylists(entry.payload)
+      // await this.loadPlaylists(entry.payload)
+      await this.loadPlaylists()
     })
 
     await this.loadPlaylists()
