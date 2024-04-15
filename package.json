@@ -1,5 +1,5 @@
 {
-  "name": "web3-workshop-react",
+  "name": "web3-workshop",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,10 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.24.1",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-syntax-decorators": "^7.24.1"
   }
 }
