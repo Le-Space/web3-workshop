@@ -42,6 +42,13 @@ class PlaylistsStore {
       // this.connectedPeers-=1
       console.log("connectedPeers",this.connectedPeers)
     });
+
+    ipfs.libp2p.services.pubsub.addEventListener('message', event => {
+      const topic = event.detail.topic
+      const message = new TextDecoder().decode(event.detail.data)
+      console.log(`Message received on topic '${topic}': ${message}`)
+    })
+
     const identities = await Identities({ ipfs }) //if you forget this you can spend a full day looking for the mistake
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
