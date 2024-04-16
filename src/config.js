@@ -17,7 +17,7 @@ import { FaultTolerance } from '@libp2p/interface-transport'
 // const multiaddrs = ["/dns4/ipfs.le-space.de/tcp/443/wss/p2p/12D3KooWAJjbRkp8FPF5MKgMU53aUTxWkqvDrs4zc1VMbwRwfsbE"]
 
 // const multiaddrs = ['/ip4/192.168.243.226/udp/9090/webrtc-direct/certhash/uEiAIbksoQ56yn3UPDn0k_abCkGBHCf79iUemkVXRn_Vy2g/p2p/12D3KooWCKAZ69AYhNnNzbnC73NX9MZqZQyXicFmarAqW2h2Ejuy']
-const multiaddrs = ['/ip4/159.69.119.82/udp/9090/webrtc-direct/certhash/uEiAIh0DoA5Qk2xTpc_j58KZMvww9CQzN6UNgsJ-DTuM6XQ/p2p/12D3KooWPUi8yRJXGXoMXy3ipv2niij8iYBAvEmnT1JfsjURDghU']
+const multiaddrs = ['/ip4/159.69.119.82/udp/9090/webrtc-direct/certhash/uEiAIh0DoA5Qk2xTpc_j58KZMvww9CQzN6UNgsJ-DTuM6XQ/p2p/12D3KooWEwE6YXJ1sKUEn6tsWzBEC4816PrFSKTri9vxzZyDUgFN']
 // const multiaddrs = ['/ip4/192.168.0.104/udp/9090/webrtc-direct/certhash/uEiAIbksoQ56yn3UPDn0k_abCkGBHCf79iUemkVXRn_Vy2g/p2p/12D3KooWKjNwG54UDVgtScSDhH4ZdganxVf6PWPCrqB5FeJvoEnP']
 // const multiaddrs = 192.168.0.104
 //     import.meta.env.MODE === 'development'
