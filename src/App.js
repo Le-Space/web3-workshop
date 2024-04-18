@@ -20,7 +20,7 @@ class App extends Component {
         console.log("component mounted")
         let blockstore = new LevelBlockstore("./helia-blocks")
         let datastore = new LevelDatastore("./helia-data")
-        const libp2p = await createLibp2p(config)
+        const libp2p = await createLibp2p()
         const ipfs = await createHelia({blockstore, datastore, libp2p})
         await store.connect(ipfs)
         window.store = store

@@ -1,6 +1,9 @@
-import { makeObservable,observable,computed, action, flow } from 'mobx'
+import { makeObservable,observable, action } from 'mobx'
 import { createOrbitDB, Identities, IPFSAccessController, OrbitDBAccessController } from "@orbitdb/core";
+import { multiaddr,isMultiaddr } from '@multiformats/multiaddr'
 import { unixfs } from '@helia/unixfs'
+import { bootstrapConfig } from './config'
+
 
 class PlaylistsStore {
 
@@ -35,10 +38,37 @@ class PlaylistsStore {
       console.log("connectedPeers",this.connectedPeers)
     });
 
+    ipfs.libp2p.addEventListener('self:peer:update', async (evt) => {
+      // Updated self multiaddrs?
+      console.log("evt",evt.target)
+      console.log("ipfs.libp2p.getMultiaddrs()",ipfs.libp2p.getMultiaddrs())
+      // console.log("connecting too relay",isMultiaddr(bootstrapConfig.list[0]))
+      // console.log("connecting too relay",bootstrapConfig.list[0])
+      // const conn = await ipfs.libp2p.dial(multiaddr(bootstrapConfig.list[0]))
+
+      // console.log(`Connected to the relay ${conn.remotePeer.toString()}`)
+      // console.log(`Advertising with a relay address of ${ipfs.libp2p.getMultiaddrs()[0].toString()}`)
+    })
+
+    ipfs.libp2p.addEventListener('peer:discovery', async (evt) => {
+      const peer = evt.detail
+      console.log("calling peerId",peer.id?.toString())
+
+      // if(bootstrapConfig.list[0].indexOf(peer.id.toString())===-1
+      //     // && peer.id.toString() !== '12D3KooWLnskZhPyxf45AMWzwjVd7JnKttqg6aUphF26ucWhBCZS'
+      //     && peer.id.toString() !== ipfs.libp2p.peerId.toString()){
+      //   console.log("our peerId",ipfs.libp2p.peerId.toString())
+      //     console.log("dialing now!",`${bootstrapConfig.list[0]}/p2p-circuit/p2p/${peer.id.toString()}`)
+      //   const addr =  multiaddr(`${bootstrapConfig.list[0]}/p2p-circuit/p2p/${peer.id.toString()}`)
+      //   await store.ipfs.libp2p.dial(addr)
+      // }
+
+      })
+
     ipfs.libp2p.addEventListener('connection:close', (c) => {
       console.log("connection:close",c);
       const index =  this.connectedPeers.indexOf(c.detail.remoteAddr.toString());
-      const x =  this.connectedPeers.splice(index, 1);
+      this.connectedPeers.splice(index, 1);
       // this.connectedPeers-=1
       console.log("connectedPeers",this.connectedPeers)
     });
@@ -46,14 +76,14 @@ class PlaylistsStore {
     ipfs.libp2p.services.pubsub.addEventListener('message', event => {
       const topic = event.detail.topic
       const message = new TextDecoder().decode(event.detail.data)
-      console.log(`Message received on topic '${topic}': ${message}`)
+      // console.log(`Message received on topic '${topic}': ${message}`)
     })
 
     const identities = await Identities({ ipfs }) //if you forget this you can spend a full day looking for the mistake
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
     this.odb = await createOrbitDB({
-      ipfs,identity,identities, directory: './web3-workshop-05' }
+      ipfs,identity,identities, directory: './web3-workshop-06' }
     )
 
    // useAccessController(IPFSAccessController)

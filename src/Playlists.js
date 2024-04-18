@@ -19,9 +19,10 @@ const PlaylistItem =({ playlist, store }) => {
     )
 }
 
-const PeerItem =({ peer, index, store }) => {
+const PeerItem =({ peer, index }) => {
+    console.log("index",index)
     return (
-        <li key={index}>
+        <li key={index | peer.id | '0'}>
             {peer}
         </li>
     )
@@ -35,6 +36,7 @@ const Playlists = (props) => {
             <div>
                 {
                     props.store.connectedPeers.map((p,index) => {
+                        console.log("index-",index)
                         return (<PeerItem index={index} peer={p} store={props.store}/>)
                     })
                 }
