@@ -32,7 +32,7 @@ class PlaylistsStore {
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
     this.odb = await createOrbitDB({
-      ipfs,identity,identities, directory: './web3-workshop' }
+      ipfs,identity,identities, directory: './web3-workshop-11052023' }
     )
 
    // useAccessController(IPFSAccessController)
@@ -49,11 +49,16 @@ class PlaylistsStore {
 
     this.playlistDB.events.on('update', async (entry) => {
       console.log("update event",entry);
-      await this.loadPlaylists(entry.payload)
+      await this.loadPlaylists()
     })
 
     await this.loadPlaylists()
     this.isOnline = true
+
+    setInterval(async () => {
+      console.log(await this.ipfs.libp2p.services.pubsub.getTopics())
+    } , 1000)
+
   }
 
   addToPlaylists = (entry) => {
