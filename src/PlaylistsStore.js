@@ -7,11 +7,8 @@ class PlaylistsStore {
   playlists = []
   isOnline = false
   currentPlaylist = {}
-<<<<<<< HEAD
   version = "v0.1"
-=======
   connectedPeers = []
->>>>>>> 4f132b8d23d8a93c2662df83e2d1eb124ee997a8
   ipfs = null
   odb = null
   playlistDB = null
@@ -20,10 +17,7 @@ class PlaylistsStore {
     makeObservable(this, {
       playlists: observable,
       currentPlaylist: observable,
-<<<<<<< HEAD
-=======
       connectedPeers: observable,
->>>>>>> 4f132b8d23d8a93c2662df83e2d1eb124ee997a8
       connect: action,
       deletePlaylist: action,
       loadPlaylists: action,
@@ -70,10 +64,6 @@ class PlaylistsStore {
 
     this.playlistDB.events.on('update', async (entry) => {
       console.log("update event",entry);
-<<<<<<< HEAD
-=======
-      // await this.loadPlaylists(entry.payload)
->>>>>>> 4f132b8d23d8a93c2662df83e2d1eb124ee997a8
       await this.loadPlaylists()
     })
 
