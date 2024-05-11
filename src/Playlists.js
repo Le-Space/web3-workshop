@@ -4,6 +4,8 @@ import { observer } from 'mobx-react'
 import './styles/Playlists.scss'
 import CreatePlaylist from './CreatePlaylist'
 
+
+
 const PlaylistItem =({ playlist, store }) => {
     return (
         <li>
@@ -17,10 +19,27 @@ const PlaylistItem =({ playlist, store }) => {
     )
 }
 
+const PeerItem =({ peer, index, store }) => {
+    return (
+        <li key={index}>
+            {peer}
+        </li>
+    )
+}
+
 const Playlists = (props) => {
     return (
         <div style={{maxWidth: "800px"}}>
             <CreatePlaylist {...props}/>
+            <h1>PeerList</h1>
+            <div>
+                {
+                    props.store.connectedPeers.map((p,index) => {
+                        return (<PeerItem index={index} peer={p} store={props.store}/>)
+                    })
+                }
+            </div>
+
             <ul className="playlist-items"> {
                 props.store.playlists.map(playlist => {
                         return (<PlaylistItem key={playlist.key} playlist={playlist} store={props.store}/>)
