@@ -14,7 +14,7 @@
     "@testing-library/user-event": "^13.5.0",
     "blockstore-level": "^1.1.8",
     "datastore-level": "^10.1.7",
-    "helia": "^4.2.0",
+    "helia": "^4.1.2",
     "mobx": "^6.12.3",
     "mobx-react": "^9.1.1",
     "react": "^18.2.0",

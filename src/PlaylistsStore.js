@@ -47,7 +47,7 @@ class PlaylistsStore {
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
     this.odb = await createOrbitDB({
-      ipfs,identity,identities, directory: './web3-workshop-15052023-01' }
+      ipfs,identity,identities, directory: './web3-workshop-15052023-02' }
     )
 
    // useAccessController(IPFSAccessController)
