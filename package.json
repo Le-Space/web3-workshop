@@ -8,7 +8,7 @@
     "@helia/unixfs": "^3.0.3",
     "@libp2p/interface-transport": "^4.0.3",
     "@libp2p/pubsub-peer-discovery": "^10.0.2",
-    "@orbitdb/core": "file:../../DecentraSol/orbitdb/orbitdb-core-1.0.0.tgz",
+    "@orbitdb/core": "file:./orbitdb-core-1.0.0.tgz",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
