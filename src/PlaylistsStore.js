@@ -29,7 +29,6 @@ class PlaylistsStore {
 
   async connect(ipfs, options = {}) {
     this.ipfs = ipfs
-   console.log("ipfs",ipfs.libp2p.peerId)
     ipfs.libp2p.addEventListener('connection:open',  async (c) => {
       console.log("connection:open",c.detail.remoteAddr.toString())
       this.connectedPeers.push(c.detail.remoteAddr.toString())
@@ -47,7 +46,7 @@ class PlaylistsStore {
     const identity = options.identity || await identities.createIdentity({ id: 'user' })
 
     this.odb = await createOrbitDB({
-      ipfs,identity,identities, directory: './web3-workshop-15052023-02' }
+      ipfs,identity,identities, directory: './web3-workshop-16052023-01' }
     )
 
    // useAccessController(IPFSAccessController)
