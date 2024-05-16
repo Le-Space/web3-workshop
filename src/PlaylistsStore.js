@@ -29,7 +29,7 @@ class PlaylistsStore {
 
   async connect(ipfs, options = {}) {
     this.ipfs = ipfs
-
+   console.log("ipfs",ipfs.libp2p.peerId)
     ipfs.libp2p.addEventListener('connection:open',  async (c) => {
       console.log("connection:open",c.detail.remoteAddr.toString())
       this.connectedPeers.push(c.detail.remoteAddr.toString())

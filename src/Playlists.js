@@ -31,7 +31,8 @@ const Playlists = (props) => {
     return (
         <div style={{maxWidth: "800px"}}>
             <CreatePlaylist {...props}/>
-            <h1>PeerList</h1>
+            <h2>PeerId: {props.store.ipfs?.libp2p?.peerId.toString()}</h2>
+            <h2>PeerList</h2>
             <div>
                 {
                     props.store.connectedPeers.map((p,index) => {
